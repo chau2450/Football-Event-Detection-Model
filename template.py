@@ -25,7 +25,7 @@ list_of_files = [
     "app.py",
     "main.py",
     "Dockerfile",
-    "requirements.txt",
+    "environment.yml",
     "setup.py",
     "research/eda.ipynb",
     "research/pipeline_test.ipynb",
