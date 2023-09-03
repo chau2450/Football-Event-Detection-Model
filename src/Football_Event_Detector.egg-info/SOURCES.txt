@@ -1,3 +1,4 @@
+MANIFEST.in
 README.md
 setup.py
 src/Football_Event_Detector/__init__.py
@@ -5,6 +6,10 @@ src/Football_Event_Detector.egg-info/PKG-INFO
 src/Football_Event_Detector.egg-info/SOURCES.txt
 src/Football_Event_Detector.egg-info/dependency_links.txt
 src/Football_Event_Detector.egg-info/top_level.txt
+src/Football_Event_Detector/YOLO/__init__.py
+src/Football_Event_Detector/YOLO/gen_csv_data.py
+src/Football_Event_Detector/YOLO/model.py
+src/Football_Event_Detector/YOLO/voc_label.py
 src/Football_Event_Detector/config/__init__.py
 src/Football_Event_Detector/config/configuration.py
 src/Football_Event_Detector/conponents/__init__.py
