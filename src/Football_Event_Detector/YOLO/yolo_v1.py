@@ -24,7 +24,7 @@ class Yolo(nn.Module):
                     case 'conv':
                         self.layers += [CNN_LAYER(self.in_ch, layer['filters'], kernel_size=layer['kernel_size'],
                                                      stride=layer['stride'],padding=layer['padding'])]
-                        self.in_ch = self.in_ch, layer['filters']
+                        self.in_ch = layer['filters']
                     case 'maxpool':
                         self.layers += [nn.MaxPool2d(kernel_size=(layer['size'],layer['size']) 
                                                      ,stride=(layer['stride'],layer['stride']))]
@@ -35,7 +35,7 @@ class Yolo(nn.Module):
                         self.layers += [CNN_LAYER(self.in_ch, layer['block'][j]['filters'], kernel_size=layer['block'][j]['kernel_size'],
                                                      stride=layer['block'][j]['stride'],padding=layer['block'][j]['padding'])]
 
-                        self.in_ch = self.in_ch, layer['filters']
+                        self.in_ch = layer['block'][j]['filters']
                 
         self.dn = nn.Sequential(*self.layers) 
         
@@ -45,18 +45,14 @@ class Yolo(nn.Module):
         conn2 = nn.Linear(in_features=4096, out_features=7*7*(20+2*5))
         
         
-        self.fcl(nn.Flatten(), con1, nn.Dropout(0.5), nn.LeakyReLU(0.1), conn2)
+        self.fcl= nn.Sequential(nn.Flatten(), con1, nn.Dropout(0.5), nn.LeakyReLU(0.1), conn2)
         
             
-    
+        print(self.layers)
     
     def forward_pass(self, val: any)-> None:
         return self.fcl(torch.flatten(self.dn(val), start_dim=1))  
 
-        
-        
-        
-        
 
 class CNN_LAYER(nn.Module):
     def __init__(self, *args, **kwargs) -> None:
@@ -69,7 +65,7 @@ class CNN_LAYER(nn.Module):
     
     def __conv_layer(self, **kwargs) -> None:
         self.conv_layer = nn.Conv2d(self.in_ch, self.out_ch, bias=False, **kwargs)
-        self.batch_norm = nn.BatchNorm2d(self.out_ch) # speed up training process 
+        self.batch_norm = nn.BatchNorm2d(self.out_ch) 
         self.leaky_relu = nn.LeakyReLU(0.1)
     
     
@@ -80,17 +76,8 @@ class CNN_LAYER(nn.Module):
     
     
 
-class Yolo_v1_loss(nn.Module):
-    def __init__(self, **kwargs) -> None:
-        super(Yolo_v1_loss, self).__init__()
-        self.classes = kwargs.get('classes', 20)
-        self.boxes = kwargs.get('boxes', 2)
-        self.split = kwargs.get('split', 7)
-        #based on paper, focus on points not on object
-        self.no_obj = kwargs.get('no_obj_lambda', 0.5)
-        self.co_ord = kwargs.get('coord_lambda', 5)
+
         
-        self.mse = nn.MSELoss(reduction="sum")
         
 
         
