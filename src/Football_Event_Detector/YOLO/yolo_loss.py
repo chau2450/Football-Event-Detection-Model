@@ -12,13 +12,13 @@ class Yolo_v1_loss(nn.Module):
         self.boxes = kwargs.get('boxes', 2)
         self.split = kwargs.get('split', 7)
         #based on paper, higher penalty for bounding box
-        self.no_obj = kwargs.get('no_obj_lambda', 0.5)
-        self.co_ord = kwargs.get('coord_lambda', 5)
+        self.lambda_noobj = kwargs.get('no_obj_lambda', 0.5)
+        self.lambda_coord = kwargs.get('coord_lambda', 5)
         
         self.mse = nn.MSELoss(reduction="sum")
     
     
-    def loss_func(self, predictions, target):
+    def forward(self, predictions, target):
         
         
         
@@ -103,6 +103,9 @@ class Yolo_v1_loss(nn.Module):
             torch.flatten(exists_box * target[..., :20], end_dim=-2,),
         )
 
+        
+        # summation of all losses
+        
         loss = (
             self.lambda_coord * box_loss  # first two rows in paper
             + object_loss  # third row in paper
@@ -114,5 +117,4 @@ class Yolo_v1_loss(nn.Module):
         
 
 
-    
-    # using midpoint format
+

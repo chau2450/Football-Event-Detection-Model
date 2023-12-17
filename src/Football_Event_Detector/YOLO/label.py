@@ -6,6 +6,7 @@ import torch
 import os
 import pandas as pd
 from PIL import Image
+from torchvision import transforms
 
 
 class VOCDataset(torch.utils.data.Dataset):
@@ -36,8 +37,17 @@ class VOCDataset(torch.utils.data.Dataset):
                 boxes.append([class_label, x, y, width, height])
 
         img_path = os.path.join(self.img_dir, self.annotations.iloc[index, 0])
-        image = Image.open(img_path)
+        image_pil = Image.open(img_path)
         boxes = torch.tensor(boxes)
+        
+        
+        transform = transforms.Compose([
+            transforms.Resize((448, 448)),  # Resize all images to 448x448 (or any other fixed size)
+            transforms.ToTensor(),  # Convert PIL image to Tensor
+            # Add other necessary transformations here
+        ])
+        
+        image = transform(image_pil)
 
         if self.transform:
             # image = self.transform(image)
@@ -88,3 +98,12 @@ class VOCDataset(torch.utils.data.Dataset):
                 label_matrix[i, j, class_label] = 1
 
         return image, label_matrix
+    
+    
+    
+    def __str__(self):
+        return f"VOCDataset with {len(self)} samples"
+    
+    
+    def __repr__(self):
+        return f"VOCDataset(csv_file={self.csv_file}, img_dir={self.img_dir}, label_dir={self.label_dir}, transform={self.transform}, S={self.S}, B={self.B}, C={self.C})"
