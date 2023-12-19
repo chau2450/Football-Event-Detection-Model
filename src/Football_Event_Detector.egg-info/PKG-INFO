@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: Football-Event-Detector
+Version: 0.0.0
+Summary: Event detection model for Football Matches
+Home-page: https://github.com/chau2450/Football-Event-Detection-Model
+Author: chau2450
+Author-email: chau2450@gmail.com
+Project-URL: Bug Tracker, https://github.com/chau2450/Football-Event-Detection-Model/issues
+
+# Project Information
+
+This is a kaggle competition (https://www.kaggle.com/competitions/dfl-bundesliga-data-shootout). The purpose of this model is to  classify various events in a football match. Applications could range from profesional use to semi-professional teams who cannot afford expensive software, but still want to gather match data in a automated mannor.

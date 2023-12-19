@@ -1,1 +1,5 @@
 data/raw_data
+src/Football_Event_Detector/YOLO/data/
+src/Football_Event_Detector/YOLO/old_txt_files/
+src/Football_Event_Detector/YOLO/metadata/
+YOLO_V1_train/
