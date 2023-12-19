@@ -88,7 +88,11 @@ class yolo_utils:
         assert box_format in ["corners", "midpoint"], "Invalid box format"
 
         # Filter out boxes with a low detection probability
+<<<<<<< HEAD
         filtered_boxes = [box for box in bounding_boxes if box[-1] > p_thresh]
+=======
+        filtered_boxes = [box for box in bounding_boxes if box[1] > p_thresh]
+>>>>>>> 1736d8d6c4d9c2cbb6f0cb48ac2035220f998363
         
         # Sort the boxes by score in descending order
         filtered_boxes.sort(key=lambda x: x[1], reverse=True)
@@ -237,6 +241,7 @@ class yolo_utils:
         return sum(avg_precisions) / len(avg_precisions)
 
 
+<<<<<<< HEAD
     @staticmethod
     def decode_predictions(predictions, S=7, B=2, C=20, confidence_threshold=0.5, nms_threshold=0.4):
         """
@@ -278,3 +283,5 @@ class yolo_utils:
         y2 = int((y_center + height / 2) * 448)
 
         return x1, y1, x2, y2
+=======
+>>>>>>> 1736d8d6c4d9c2cbb6f0cb48ac2035220f998363
