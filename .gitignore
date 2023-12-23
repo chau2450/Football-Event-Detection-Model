@@ -3,3 +3,7 @@ src/Football_Event_Detector/YOLO/data/
 src/Football_Event_Detector/YOLO/old_txt_files/
 src/Football_Event_Detector/YOLO/metadata/
 YOLO_V1_train/
+.ipynb_checkpoints
+.vscode
+research/notebooks/test_1.ipynb
+research/notebooks/__temp__.mp4
