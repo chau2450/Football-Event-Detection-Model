@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+    <div id="d3-container"></div>
+    <script>
+        var framesData = [
+            // Frame 1 data
+            [
+                { "class": "player", "x": 100, "y": 150 },
+                { "class": "ball", "x": 200, "y": 300 }
+            ],
+            // Frame 2 data
+            [
+                { "class": "player", "x": 105, "y": 155 },
+                { "class": "ball", "x": 205, "y": 305 }
+            ]
+            // ... more frames
+        ];
+
+        // Setup SVG and pitch
+        var svg = d3.select("#d3-container").append("svg")
+                    .attr("width", 600)
+                    .attr("height", 400);
+
+        // Draw soccer pitch
+        svg.append("rect")
+            .attr("x", 50)
+            .attr("y", 50)
+            .attr("width", 500)
+            .attr("height", 300)
+            .style("fill", "none")
+            .style("stroke", "green")
+            .style("stroke-width", 2);
+
+        // Function to update the frame
+        function updateFrame(frameIndex) {
+            var data = framesData[frameIndex];
+            var circles = svg.selectAll("circle").data(data);
+
+            circles.enter().append("circle")
+                .attr("cx", function(d) { return d.x; })
+                .attr("cy", function(d) { return d.y; })
+                .attr("r", 10) // Radius of circles
+                .style("fill", function(d) { return d.class === "player" ? "blue" : "orange"; });
+
+            circles.transition()
+                .duration(100) // Duration of transition between frames
+                .attr("cx", function(d) { return d.x; })
+                .attr("cy", function(d) { return d.y; });
+
+            circles.exit().remove();
+        }
+
+        // Function to play the animation
+        var frameIndex = 0;
+        function playAnimation() {
+            updateFrame(frameIndex);
+            frameIndex = (frameIndex + 1) % framesData.length;
+            setTimeout(playAnimation, 100); // Update every 100ms
+        }
+
+        playAnimation(); // Start the animation
+    </script>
+</body>
+</html>

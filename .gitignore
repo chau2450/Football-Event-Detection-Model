@@ -1,7 +1,5 @@
+data
 data/raw_data
-src/Football_Event_Detector/YOLO/data/
-src/Football_Event_Detector/YOLO/old_txt_files/
-src/Football_Event_Detector/YOLO/metadata/
 research/notebooks/test_1.ipynb
 research/notebooks/challenge
 research/notebooks/football-players-detection-4
@@ -9,3 +7,9 @@ research/notebooks/test
 research/notebooks/train
 research/notebooks/EDA.html
 data/raw_data/soccer_net/
+data/staging_data
+data/consumption_data/soccer_net/
+data/consumption_data
+/home/ivanbliminse/Documents/Football-Event-Detection-Model/data/consumption_data/soccer_net
+data/consumption_data
+research/notebooks/.cometml-runs
