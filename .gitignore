@@ -13,3 +13,4 @@ data/consumption_data
 /home/ivanbliminse/Documents/Football-Event-Detection-Model/data/consumption_data/soccer_net
 data/consumption_data
 research/notebooks/.cometml-runs
+research/notebooks/SoccerNet_calibration
